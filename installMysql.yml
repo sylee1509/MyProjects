@@ -1,0 +1,42 @@
+# This file is installing Mysql into target servers
+
+
+
+- name: Install Mysql 
+  hosts: TEST
+  tasks:
+    - name: Upgrade Packages
+      import_tasks: upgrade_pkg.yml
+
+    - name: Install rpm
+      yum:
+        update_cache: yes
+        name: http://dev.mysql.com/get/mysql-community-release-el7-5.noarch.rpm
+        state: latest
+
+    - name: Install MySQL Community Server
+      yum: 
+        name: mysql-community-server
+        state: latest
+
+    - name: Install MySQL Server
+      yum:
+        name: mysql-server
+        state: latest
+
+    - name: Start mysql
+      command: systemctl start mysqld
+
+    - name: Enable mysql
+      command: systemctl enable mysqld
+
+    - name: Service mysql
+      service:
+        name: mysqld
+        state: started
+
+    - name: Execute mysql
+      command: mysql
+
+
+

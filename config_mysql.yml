@@ -1,0 +1,35 @@
+#This file configures mysql settings when 111 error occurs
+
+- name: Configure MySQL
+  hosts: TEST
+  tasks:
+    - name: Stop Service
+      service:
+        name: mysqld
+        state: stopped
+
+    - name: Change Mode
+      file:
+        path: /var/lib/mysql
+        mode: 0755
+        state: directory
+        recurse: yes  
+
+# command: chmod 755 -R /var/lib/mysql
+    
+    - name: Change Own
+      file:
+        path: /var/lib/mysql
+        owner: mysql
+        group: mysql
+        state: directory
+        recurse: yes
+
+# command: chown mysql:mysql -R /var/lib/mysql
+
+    - name: Start Service
+      service:
+        name: mysqld
+        state: started
+
+

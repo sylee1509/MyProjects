@@ -1,0 +1,21 @@
+#This file removes mysql in the TEST servers
+
+- name: Remove Mysql in the TEST servers
+  hosts: TEST
+  tasks:
+    - name: Uninstall MySQL Packages
+      yum:
+        name: remove mysql-client mysql-server mysql-common mysql-devel
+        state: removed
+
+#    - name: Remove MySQL Directory
+#      command: cp /var/lib/mysql /var/lib/mysql_old_backup
+#      args:
+#        removes: /var/lib/mysql
+#        creates: /var/lib/mysql/mysql_old_backup
+
+    - name: Remove MySQL packages
+      file:
+        path: /var/lib/mysql
+        state: absent
+

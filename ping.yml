@@ -1,0 +1,9 @@
+#This file pings to all servers
+
+- name: Ping Test
+  hosts: all
+  tasks:
+    - name: Ping Test All
+      ping:
+
+

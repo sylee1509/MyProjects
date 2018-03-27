@@ -1,0 +1,6 @@
+#This file upgrades all packages
+
+- name: Upgrade Packages
+  yum:
+    name: '*'
+    state: latest 
